@@ -117,7 +117,7 @@ main{position:relative;z-index:2}
 .auto .sh{position:absolute;inset:0;background:linear-gradient(180deg,#000,rgba(0,0,0,.3) 45%,#000)}
 .auto .c{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;
   grid-template-areas:"txt vid" "cta vid";align-items:center;gap:clamp(20px,3vw,40px) clamp(24px,4vw,60px)}
-.auto .txt{grid-area:txt;align-self:end}
+.auto .txt{grid-area:txt;align-self:end;min-width:0}
 .auto .c>.vid{grid-area:vid}
 .auto .cta{grid-area:cta;align-self:start;margin:0}
 .auto h4{font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.05em;margin:12px 0;line-height:.98}
@@ -159,11 +159,11 @@ main{position:relative;z-index:2}
 @media (max-width:700px){
   .proofwrap{height:220vh}
   .b1,.b2{flex:1;text-align:center;padding:15px 12px;font-size:14px}
-  .auto .c{grid-template-columns:1fr}
+  .auto .c{grid-template-columns:1fr;grid-template-areas:"txt" "vid" "cta"}
   .vid{justify-self:center;width:100%;max-width:460px;height:auto;aspect-ratio:9/16}
   .b2media{flex-direction:column;align-items:center}
   .b2media .shot{width:100%;max-width:460px;height:auto;aspect-ratio:9/16}
-  .auto .c{gap:22px}
+  .auto .c{gap:22px;grid-template-columns:1fr;grid-template-areas:"txt" "vid" "cta"}
   .b2b{grid-template-columns:1fr}
   .trust{gap:8px}
   .trust small{font-size:10px}
@@ -220,9 +220,9 @@ main{position:relative;z-index:2}
         <p>Canapele, colțare, fotolii, saltele. Extracția scoate din fibră praful, petele și mirosul — nu le acoperă. O canapea durează 1–1,5 ore, o saltea aproximativ o oră.</p>
       </div>
       <video class="vid" src="assets/opt/mobila.mp4" poster="assets/opt/mobila-poster.jpg" muted loop playsinline preload="none"></video>
-    </div>
       <div class="acts cta"><a class="b1" href="tel:+37369685969">Sună 069 685 969</a></div>
-    </section>
+    </div>
+  </section>
 
   <section class="sec w">
     <div class="lbl">Pentru firme</div>
@@ -250,9 +250,9 @@ main{position:relative;z-index:2}
         <p>Scaune, banchete, podea, uși, portbagaj. Uscarea e inclusă — pleci cu mașina, nu o lași peste noapte. Poți veni la noi pe str. Timiș 56/5 sau venim noi la tine.</p>
       </div>
       <video class="vid" src="assets/opt/auto.mp4" poster="assets/opt/auto-poster.jpg" muted loop playsinline preload="none"></video>
-    </div>
       <div class="acts cta"><a class="b1" href="tel:+37369685969">Sună pentru salon</a></div>
-    </section>
+    </div>
+  </section>
 
   <section class="proofwrap">
     <div class="pin">
