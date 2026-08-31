@@ -39,8 +39,20 @@ img,video{display:block}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
 main{position:relative;z-index:2}
 
+.herobg{position:absolute;inset:0;overflow:hidden;z-index:-1}
+.herobg video{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;
+  background:#000 center/cover no-repeat}
+.herobg video.on{opacity:.5}
+.herobg-sh{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.75) 45%,rgba(0,0,0,.45) 100%),
+             linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.15) 40%,#000 100%)}
+@media (max-width:700px){
+  .herobg video.on{opacity:.38}
+  .herobg-sh{background:linear-gradient(180deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.35) 45%,#000 100%)}
+}
+
 /* hero */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:110px;padding-bottom:26px}
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:110px;padding-bottom:26px}
 .hero .ln i{font-size:clamp(40px,10vw,126px);font-weight:900;letter-spacing:-.055em;line-height:.92}
 .hero .ln:nth-of-type(2) i{transition-delay:.08s}.hero .ln:nth-of-type(3) i{transition-delay:.16s}
 .lead{margin-top:26px;max-width:520px;font-size:clamp(14px,1.5vw,17px);line-height:1.65;opacity:.66}
@@ -190,6 +202,10 @@ main{position:relative;z-index:2}
 <main>
 
   <section class="hero w">
+    <div class="herobg" aria-hidden="true">
+      <video id="herovid" src="assets/opt/hero.mp4" poster="assets/opt/hero-poster.jpg" muted loop playsinline preload="none"></video>
+      <div class="herobg-sh"></div>
+    </div>
     <div class="lbl" style="margin-bottom:20px">Chișinău · din 2020</div>
     <div class="ln"><i>CURĂȚĂM.</i></div>
     <div class="ln"><i>IGIENIZĂM.</i></div>
@@ -390,6 +406,18 @@ main{position:relative;z-index:2}
     requestAnimationFrame(loop);
   })();
 
+  var hv=document.getElementById('herovid');
+  if(hv&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    hv.style.backgroundImage="url('assets/opt/hero-poster.jpg')";
+    addEventListener('load',function(){
+      setTimeout(function(){
+        hv.load();
+        hv.addEventListener('playing',function(){hv.classList.add('on')},{once:true});
+        var q=hv.play(); if(q&&q.catch)q.catch(function(){hv.classList.add('on')});
+      },400);
+    });
+  } else if(hv){ hv.style.backgroundImage="url('assets/opt/hero-poster.jpg')"; hv.classList.add('on') }
+
   var vio=new IntersectionObserver(function(e){
     e.forEach(function(x){
       var v=x.target;
@@ -397,7 +425,7 @@ main{position:relative;z-index:2}
       else v.pause();
     });
   },{threshold:.2});
-  document.querySelectorAll('video').forEach(function(v){vio.observe(v)});
+  document.querySelectorAll('video:not(#herovid)').forEach(function(v){vio.observe(v)});
 
   var io=new IntersectionObserver(function(e){
     e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')});
