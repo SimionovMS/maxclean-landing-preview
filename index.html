@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>MaxClean — prototip landing</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#000;color:#fff;overflow-x:hidden;
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+img,video{display:block}
+.w{padding-left:clamp(18px,5vw,64px);padding-right:clamp(18px,5vw,64px);max-width:1240px;margin:0 auto}
+.lbl{font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.45}
+.y{color:#F1EC40}
+.ln{overflow:hidden;display:block}
+.ln i{display:block;font-style:normal;transform:translateY(112%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+.ln.in i{transform:none}
+.up{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.up.in{opacity:1;transform:none}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(18px,5vw,64px);transition:all .35s cubic-bezier(.16,1,.3,1)}
+.nav.s{padding-top:9px;padding-bottom:9px;background:rgba(0,0,0,.72);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.09)}
+.nav .brand{display:flex;align-items:center;gap:10px}
+.nav img{height:32px;width:32px;border-radius:8px;object-fit:cover;transition:all .35s}
+.nav.s img{height:26px;width:26px}
+.wm{font-weight:900;letter-spacing:-.04em;font-size:16px}
+.wm em{font-style:normal;color:#F1EC40}
+.navc{font-size:13px;font-weight:800;padding:9px 16px;border-radius:99px;background:#F1EC40;color:#000;text-decoration:none}
+
+/* lumina */
+.lights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.g{position:absolute;border-radius:50%;filter:blur(110px);will-change:transform}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+main{position:relative;z-index:2}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px;padding-bottom:40px}
+.hero .ln i{font-size:clamp(40px,10vw,126px);font-weight:900;letter-spacing:-.055em;line-height:.92}
+.hero .ln:nth-of-type(2) i{transition-delay:.08s}.hero .ln:nth-of-type(3) i{transition-delay:.16s}
+.lead{margin-top:26px;max-width:520px;font-size:clamp(14px,1.5vw,17px);line-height:1.65;opacity:.66}
+.acts{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.b1,.b2{padding:16px 26px;border-radius:99px;font-size:15px;text-decoration:none;display:inline-block}
+.b1{background:#F1EC40;color:#000;font-weight:900}
+.b2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(14px);font-weight:700;color:#fff}
+.cue{margin-top:48px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.35}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 auto;padding:26px clamp(18px,5vw,64px);max-width:1240px;
+  border-top:1px solid rgba(255,255,255,.11);border-bottom:1px solid rgba(255,255,255,.11)}
+.trust b{display:block;font-size:clamp(22px,3.4vw,38px);font-weight:900;letter-spacing:-.04em}
+.trust small{font-size:11px;opacity:.5;line-height:1.35;display:block;margin-top:4px}
+
+/* dovada */
+.proofwrap{height:280vh;position:relative}
+.pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(18px,5vw,64px);max-width:1240px;margin:0 auto}
+.ptitle{font-size:clamp(26px,4.6vw,58px);font-weight:900;letter-spacing:-.045em;line-height:1.02;margin:0 0 18px}
+.ba{position:relative;width:100%;max-width:520px;margin:0 auto;aspect-ratio:1152/1024;border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.8)}
+.ba .l{position:absolute;inset:0;background-size:100% 200%}
+.ba .before{background-position:center top}
+.ba .after{background-position:center bottom;clip-path:inset(0 calc(100% - var(--p,0%)) 0 0)}
+.ba .handle{position:absolute;top:0;bottom:0;width:2px;background:#F1EC40;left:var(--p,0%);box-shadow:0 0 22px rgba(241,236,64,.8)}
+.ba .t{position:absolute;top:14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:6px 11px;border-radius:99px;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.ba .t.a{left:14px}.ba .t.b{right:14px;background:#F1EC40;color:#000;font-weight:800}
+.pfoot{text-align:center;margin-top:16px;font-size:12px;opacity:.5}
+@media (min-width:900px){
+  .pin{display:grid;grid-template-columns:minmax(260px,.9fr) 1.3fr;align-items:center;gap:clamp(30px,5vw,70px)}
+  .ptitle{margin-bottom:0}
+  .pin .ba{max-width:none}
+  .pfoot{grid-column:1;text-align:left;margin-top:20px}
+}
+
+/* rail */
+.railwrap{overflow:hidden;padding-top:clamp(70px,10vw,130px)}
+.rail{display:flex;gap:16px;padding:0 clamp(18px,5vw,64px);will-change:transform}
+.rc{flex:0 0 auto;width:clamp(160px,22vw,260px);aspect-ratio:9/14;border-radius:18px;overflow:hidden;position:relative;background:#111}
+.rc img{width:100%;height:100%;object-fit:cover;opacity:.82}
+.rc span{position:absolute;left:16px;bottom:16px;font-size:clamp(14px,1.5vw,18px);font-weight:800;letter-spacing:-.02em;z-index:2;text-shadow:0 2px 14px rgba(0,0,0,.9)}
+.rc:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.85))}
+
+/* pasi */
+.sec{padding-top:clamp(70px,10vw,140px)}
+.h2{font-size:clamp(24px,4.2vw,52px);font-weight:900;letter-spacing:-.045em;line-height:1.04;margin:12px 0 0}
+.steps{margin-top:30px}
+.step{display:flex;gap:20px;padding:22px 0;border-top:1px solid rgba(255,255,255,.11)}
+.step b{font-size:11px;color:#F1EC40;min-width:30px;letter-spacing:.1em;padding-top:5px}
+.step h5{margin:0 0 6px;font-size:clamp(17px,2.2vw,24px);font-weight:800;letter-spacing:-.03em}
+.step p{margin:0;font-size:14px;opacity:.55;line-height:1.55;max-width:52ch}
+
+/* sticla */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:26px}
+.gl{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(16px);
+  border-radius:20px;padding:24px;transform:perspective(1000px) rotateX(15deg) translateY(48px) scale(.94);opacity:0;
+  transition:all 1s cubic-bezier(.16,1,.3,1)}
+.gl.in{transform:none;opacity:1}
+.gl h6{margin:0 0 8px;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.gl p{margin:0;font-size:13.5px;opacity:.55;line-height:1.6}
+
+/* garantie */
+.guar{margin:clamp(70px,10vw,130px) auto 0;max-width:1240px;padding:clamp(24px,4vw,44px);border-radius:24px;
+  border:1px solid rgba(241,236,64,.35);background:linear-gradient(160deg,rgba(241,236,64,.1),rgba(241,236,64,.02))}
+.guar h4{margin:0 0 12px;font-size:clamp(22px,3.6vw,42px);font-weight:900;letter-spacing:-.04em;line-height:1.06}
+.guar p{margin:0;font-size:14px;opacity:.62;line-height:1.6;max-width:60ch}
+
+/* auto */
+.auto{position:relative;padding:clamp(56px,8vw,110px) 0;overflow:hidden;margin-top:0}
+.auto .bgi{position:absolute;inset:-12% 0;background-size:cover;background-position:center;opacity:.28;will-change:transform}
+.auto .sh{position:absolute;inset:0;background:linear-gradient(180deg,#000,rgba(0,0,0,.3) 45%,#000)}
+.auto .c{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:clamp(24px,4vw,60px);align-items:center}
+.auto h4{font-size:clamp(28px,5vw,64px);font-weight:900;letter-spacing:-.05em;margin:12px 0;line-height:.98}
+.auto p{max-width:46ch;font-size:14.5px;opacity:.7;line-height:1.65}
+.vid{background:#111;border-radius:22px;box-shadow:0 24px 70px rgba(0,0,0,.7);object-fit:cover;
+  height:clamp(320px,52vw,560px);aspect-ratio:9/16;width:auto}
+
+/* b2b */
+.b2b{display:grid;grid-template-columns:auto 1fr;gap:clamp(22px,4vw,50px);align-items:center;margin-top:30px}
+.b2b p{font-size:14.5px;opacity:.65;line-height:1.65;margin:0 0 18px;max-width:52ch}
+
+/* recenzii */
+.revwrap{overflow:hidden;padding-top:clamp(70px,10vw,130px)}
+.revs{display:flex;gap:14px;padding:0 clamp(18px,5vw,64px);will-change:transform;margin-top:26px}
+.rev{flex:0 0 auto;width:clamp(240px,26vw,330px);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;padding:22px}
+.rev p{margin:0 0 14px;font-size:14px;line-height:1.6}
+.rev small{font-size:12px;opacity:.45}
+.stars{color:#F1EC40;font-size:12px;letter-spacing:2px;margin-bottom:10px}
+
+/* final */
+.end{padding:clamp(90px,13vw,180px) clamp(18px,5vw,64px) 40px;text-align:center}
+.end .ln i{font-size:clamp(30px,6vw,76px);font-weight:900;letter-spacing:-.05em;line-height:1}
+.end .acts{justify-content:center}
+.foot{padding:36px clamp(18px,5vw,64px) 130px;text-align:center;font-size:12px;opacity:.35;line-height:1.9}
+
+/* bara fixa de contact */
+.fixed{position:fixed;left:0;right:0;bottom:0;z-index:70;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.94) 45%)}
+.fixed a{flex:1;text-align:center;padding:16px;border-radius:99px;font-weight:900;font-size:14.5px;text-decoration:none}
+.fixed .p{background:#F1EC40;color:#000}
+.fixed .w2{background:#1f2c33;color:#fff;border:1px solid rgba(255,255,255,.16)}
+@media (min-width:900px){.fixed{display:none}.foot{padding-bottom:70px}}
+
+/* mobil */
+@media (max-width:700px){
+  .proofwrap{height:220vh}
+  .b1,.b2{flex:1;text-align:center;padding:15px 12px;font-size:14px}
+  .auto .c{grid-template-columns:1fr}
+  .vid{justify-self:center;height:clamp(300px,78vw,440px)}
+  .b2b{grid-template-columns:1fr}
+  .trust{gap:8px}
+  .trust small{font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ln i,.up,.gl{transition:none!important;transform:none!important;opacity:1!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand"><img src="assets/mc-logo.jpg" alt="MaxClean"><div class="wm">MAX<em>CLEAN</em></div></div>
+  <a class="navc" href="tel:+37369685969">069 685 969</a>
+</nav>
+
+<div class="lights">
+  <div class="g" style="width:640px;height:640px;background:#297491;left:-180px;top:-80px;opacity:.55"></div>
+  <div class="g" style="width:380px;height:380px;background:#F1EC40;right:-120px;top:40vh;opacity:.14"></div>
+  <div class="g" style="width:700px;height:700px;background:#1b4f63;left:10vw;top:120vh;opacity:.45"></div>
+</div>
+<div class="grain"></div>
+
+<main>
+
+  <section class="hero w">
+    <div class="lbl" style="margin-bottom:20px">Chișinău · din 2020</div>
+    <div class="ln"><i>CURĂȚĂM.</i></div>
+    <div class="ln"><i>IGIENIZĂM.</i></div>
+    <div class="ln"><i class="y">REÎMPROSPĂTĂM.</i></div>
+    <p class="lead">Curățare chimică prin extracție pentru canapele, saltele, covoare și tapițerie auto — <strong>la tine acasă</strong>. Nu ridicăm mobila, venim cu utilajul la tine.</p>
+    <div class="acts">
+      <a class="b1" href="tel:+37369685969">Sună 069 685 969</a>
+      <a class="b2" href="#">Trimite o poză pe WhatsApp</a>
+    </div>
+    <div class="cue">scroll ↓</div>
+  </section>
+
+  <section class="trust up">
+    <div><b>5 ani</b><small>din decembrie 2020</small></div>
+    <div><b>96%</b><small>satisfacție</small></div>
+    <div><b>3,5 mil.</b><small>vizualizări pe clipuri</small></div>
+  </section>
+
+  
+
+  <section class="auto">
+    <div class="bgi" data-par style="background-image:url('assets/mc-p1.jpg')"></div>
+    <div class="sh"></div>
+    <div class="c w">
+      <div>
+        <div class="lbl">Mobilă moale</div>
+        <h4>Canapeaua ta,<br><span class="y">ca la început.</span></h4>
+        <p>Canapele, colțare, fotolii, saltele. Extracția scoate din fibră praful, petele și mirosul — nu le acoperă. O canapea durează 1–1,5 ore, o saltea aproximativ o oră.</p>
+        <div class="acts"><a class="b1" href="tel:+37369685969">Sună 069 685 969</a></div>
+      </div>
+      <video class="vid" src="assets/mobila.mp4" poster="assets/mc-p1.jpg" muted loop autoplay playsinline preload="metadata"></video>
+    </div>
+  </section>
+
+  <section class="sec w">
+    <div class="lbl">Pentru firme</div>
+    <div class="ln"><i class="h2">Cafenele, restaurante,<br>birouri, licee.</i></div>
+    <div class="b2b">
+      <video class="vid" src="assets/covor.mp4" poster="assets/mc-team1.jpg" muted loop autoplay playsinline preload="metadata"></video>
+      <div>
+        <p>Mobilierul care se folosește zilnic adună praf, bacterii și pete mai repede decât cel de acasă. Lucrăm în afara programului, ca să nu vă oprim activitatea.</p>
+        <div class="lbl">Spații cu trafic mare</div>
+        <div style="font-size:clamp(17px,2.2vw,24px);font-weight:800;letter-spacing:-.02em;margin-top:6px">Covoare de intrare, holuri, săli de mese</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="auto">
+    <div class="bgi" data-par style="background-image:url('assets/mc-auto2.jpg')"></div>
+    <div class="sh"></div>
+    <div class="c w">
+      <div>
+        <div class="lbl">Tapițerie auto</div>
+        <h4>Salonul,<br>spălat și uscat<br><span class="y">în 2–3 ore.</span></h4>
+        <p>Scaune, banchete, podea, uși, portbagaj. Uscarea e inclusă — pleci cu mașina, nu o lași peste noapte. Poți veni la noi pe str. Timiș 56/5 sau venim noi la tine.</p>
+        <div class="acts"><a class="b1" href="tel:+37369685969">Sună pentru salon</a></div>
+      </div>
+      <video class="vid" src="assets/auto.mp4" poster="assets/mc-auto1.jpg" muted loop autoplay playsinline preload="metadata"></video>
+    </div>
+  </section>
+
+  <section class="proofwrap">
+    <div class="pin">
+      <h2 class="ptitle"><span class="lbl" style="display:block;margin-bottom:14px">Dovada</span>Aceeași canapea.<br><span class="y">O singură procedură.</span></h2>
+      <div class="ba">
+        <div class="l before" style="background-image:url('assets/mc-ba1.jpg')"></div>
+        <div class="l after" style="background-image:url('assets/mc-ba1.jpg')"></div>
+        <div class="handle"></div>
+        <div class="t a">Înainte</div><div class="t b">După</div>
+      </div>
+      <div class="pfoot">scrollează — se curăță singură</div>
+    </div>
+  </section>
+
+  <section class="proofwrap" style="height:240vh">
+    <div class="pin">
+      <h2 class="ptitle">Scaune de sufragerie.<br><span class="y">Fără pete, fără miros.</span></h2>
+      <div class="ba">
+        <div class="l before" style="background-image:url('assets/mc-ba2.jpg')"></div>
+        <div class="l after" style="background-image:url('assets/mc-ba2.jpg')"></div>
+        <div class="handle"></div>
+        <div class="t a">Înainte</div><div class="t b">După</div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  
+
+  <section class="railwrap">
+    <div class="w"><div class="lbl">Ce curățăm</div>
+      <div class="ln"><i class="h2" style="margin-bottom:30px">Tot ce e textil<br>și nu se poate duce la spălat.</i></div>
+    </div>
+    <div class="rail" id="rail">
+      <div class="rc"><img src="assets/mc-p1.jpg" alt=""><span>Canapele &amp; colțare</span></div>
+      <div class="rc"><img src="assets/mc-p6.jpg" alt=""><span>Saltele</span></div>
+      <div class="rc"><img src="assets/mc-p5.jpg" alt=""><span>Scaune</span></div>
+      <div class="rc"><img src="assets/mc-p3.jpg" alt=""><span>Covoare &amp; mochete</span></div>
+      <div class="rc"><img src="assets/mc-auto1.jpg" alt=""><span>Tapițerie auto</span></div>
+      <div class="rc"><img src="assets/mc-p4.jpg" alt=""><span>Fotolii</span></div>
+    </div>
+    <div class="w" style="margin-top:18px;font-size:13px;opacity:.5">Nu curățăm piele — doar textil.</div>
+  </section>
+
+  <section class="sec w">
+    <div class="lbl">Cum decurge</div>
+    <div class="steps">
+      <div class="step up"><b>01</b><div><h5>Trimiți o poză</h5><p>Pe WhatsApp, Viber sau Messenger. Cu dimensiunea, dacă o știi.</p></div></div>
+      <div class="step up"><b>02</b><div><h5>Primești prețul exact</h5><p>Nu o estimare vagă — suma finală, pentru obiectul tău.</p></div></div>
+      <div class="step up"><b>03</b><div><h5>Alegem ziua</h5><p>Ne programăm în avans, ca să venim când îți convine.</p></div></div>
+      <div class="step up"><b>04</b><div><h5>Venim și lucrăm la tine acasă</h5><p>Aducem utilajul, mobila rămâne la locul ei.</p></div></div>
+    </div>
+  </section>
+
+  <section class="sec w">
+    <div class="lbl">Cum lucrăm</div>
+    <div class="g2">
+      <div class="gl"><h6>Extracție cu injecție</h6><p>Soluția intră în fibră sub presiune și e extrasă înapoi cu murdăria. Nu spălăm suprafața — scoatem ce e în ea.</p></div>
+      <div class="gl"><h6>Soluții Kärcher</h6><p>Nu sunt dăunătoare, nu provoacă alergii și nu au miros puternic.</p></div>
+      <div class="gl"><h6>La domiciliu</h6><p>Nu demontăm și nu transportăm nimic. Venim cu tot echipamentul la tine.</p></div>
+    </div>
+  </section>
+
+  <div class="guar up w">
+    <h4>Dacă pata sau mirosul revin,<br><span class="y">ne întoarcem și repetăm. Gratuit.</span></h4>
+    <p>Garantăm rezultate vizibile. Dacă ceva nu e cum trebuie, ne suni și revenim — nu plătești a doua oară.</p>
+  </div>
+
+  
+
+  
+
+  <section class="revwrap">
+    <div class="w"><div class="lbl">Ce spun clienții</div>
+      <div class="ln"><i class="h2">96% recomandă.<br><span class="y">Iată de ce.</span></i></div>
+    </div>
+    <div class="revs" id="revs">
+      <div class="rev"><div class="stars">★★★★★</div><p>„O echipă extraordinară, peste așteptările mele — de la politețe până la o curățenie genială într-un timp rapid! Nu veți regreta dacă veți apela!"</p><small>Marina C.</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>„Foarte profesioniști. Cum curăță această echipă nu am întâlnit până acum."</p><small>Svetlana C.</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>„Recomand din toată inima acești profesioniști care fac minuni din mobilierul tău. Sunt clienta lor fidelă de mulți ani."</p><small>Nadia M.</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>„Молодцы ребята! Пришли вовремя, почистили быстро и качественно! Очень довольна!"</p><small>Марина Г.</small></div>
+      <div class="rev"><div class="stars">★★★★★</div><p>„Băieții sunt punctuali, amabili și profesioniști. Au executat lucrarea rapid și la un nivel înalt."</p><small>Rodica Ț.</small></div>
+    </div>
+  </section>
+
+  <div class="end">
+    <div class="ln"><i>Trimite o poză.</i></div>
+    <div class="ln"><i class="y">Afli prețul exact.</i></div>
+    <div class="acts"><a class="b1" href="tel:+37369685969">069 685 969</a><a class="b2" href="#">WhatsApp</a></div>
+  </div>
+  <div class="foot">MaxClean · str. Timiș 56/5, Chișinău<br>Facebook · TikTok @maxclean77 · novac.maxim96@gmail.com</div>
+</main>
+
+<div class="fixed"><a class="p" href="tel:+37369685969">Sună acum</a><a class="w2" href="#">WhatsApp</a></div>
+
+<script>
+(function(){
+  var nav=document.querySelector('.nav'),gs=document.querySelectorAll('.g'),
+      rail=document.getElementById('rail'),revs=document.getElementById('revs'),
+      pars=document.querySelectorAll('[data-par]'),pins=document.querySelectorAll('.proofwrap'),
+      cur=0,tgt=0,vh=innerHeight;
+
+  addEventListener('resize',function(){vh=innerHeight},{passive:true});
+  addEventListener('scroll',function(){tgt=scrollY;nav.classList.toggle('s',scrollY>50)},{passive:true});
+
+  (function loop(){
+    cur+=(tgt-cur)*.085;
+    gs.forEach(function(g,i){
+      g.style.transform='translate3d('+Math.sin(cur/420+i*1.6)*90+'px,'+(-cur*(.06+i*.03))+'px,0)';
+    });
+
+    pins.forEach(function(w){
+      var r=w.getBoundingClientRect(),h=w.offsetHeight-vh,
+          p=Math.max(0,Math.min(1,(-r.top)/h));
+      p=Math.max(0,Math.min(1,(p-.15)/.7));
+      var ba=w.querySelector('.ba');
+      ba.style.setProperty('--p',(p*100).toFixed(1)+'%');
+      ba.querySelector('.handle').style.opacity=(p<.01||p>.99)?0:1;
+      ba.querySelector('.t.b').style.opacity=Math.max(0,Math.min(1,(p-.45)/.25));
+      ba.querySelector('.t.a').style.opacity=Math.max(0,Math.min(1,1-(p-.5)/.25));
+    });
+
+    [[rail,.42],[revs,.26]].forEach(function(pair){
+      var el=pair[0];if(!el)return;
+      var t=el.getBoundingClientRect().top,
+          max=el.scrollWidth-el.clientWidth+40;
+      if(max<=0){el.style.transform='none';return}
+      el.style.transform='translate3d('+(-Math.min(Math.max(0,(vh-t))*pair[1],max))+'px,0,0)';
+    });
+
+    pars.forEach(function(el){var t=el.parentElement.getBoundingClientRect().top;
+      el.style.transform='translate3d(0,'+((vh-t)*.06)+'px,0)'});
+
+    requestAnimationFrame(loop);
+  })();
+
+  var io=new IntersectionObserver(function(e){
+    e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')});
+  },{threshold:.25});
+  document.querySelectorAll('.ln, .up, .gl').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
